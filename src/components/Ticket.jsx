@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { TicketData } from '../utils/data';
 import eye from '../assets/img/eye.png';
+import moment from 'moment/moment';
 
 const customStyles = {
   content: {
@@ -20,20 +21,49 @@ Modal.setAppElement('#root');
 function Ticket() {
   // modal
   let subtitle;
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [tickets, setTickets] = useState([]);
+  const [formData, setFormData] = useState({});
+
+  useEffect(() => {
+    setTickets(TicketData);
+  }, []);
+
+  const handleInput = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+
+    console.log(formData);
+  };
 
   function openModal() {
     setIsOpen(true);
   }
 
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    subtitle.style.color = '#f00';
-  }
+  // function afterOpenModal() {
+  //   // references are now sync'd and can be accessed.
+  //   subtitle.style.color = '#f00';
+  // }
 
   function closeModal() {
     setIsOpen(false);
   }
+
+  const addData = (form) => {
+    let id = '00000' + (tickets.length + 1);
+    // let date = new Date();
+    let today = moment().format('YYYY-MM-DD HH:mm:ss');
+    setFormData({
+      ...formData,
+      createdat: today,
+      status: 'waiting',
+      id: id,
+    });
+
+    setTickets([...tickets, formData]);
+
+    setFormData({});
+    setIsOpen(false);
+  };
 
   return (
     <div className="ticket-helpdesk">
@@ -44,8 +74,6 @@ function Ticket() {
         </button>
         <Modal
           isOpen={modalIsOpen}
-          onAfterOpen={afterOpenModal}
-          onRequestClose={closeModal}
           style={customStyles}
           contentLabel="Example Modal"
         >
@@ -56,45 +84,68 @@ function Ticket() {
           <hr />
           <br />
           <div>
-            <form>
-              <label htmlFor="Upload Image">Upload Image</label>
+            <label htmlFor="Upload Image">Upload Image</label>
 
-              <div className="modal-input">
-                <input type="file" name="ticket-file" />
-                <br />
-              </div>
+            <div className="modal-input">
+              <input
+                type="file"
+                id="ticket-file"
+                onChange={(e) => handleInput(e)}
+                name="ticket-file"
+              />
               <br />
-              <label htmlFor="Division">Division</label>
-              <br />
-              <select name="division" className="modal-option">
-                <option value="IT Support">IT Support</option>
-                <option value="Programmer">Programmer</option>
-                <option value="Infra">Infra</option>
-              </select>
-              <br />
-              <br />
-              <label htmlFor="Question">Question</label>
-              <br />
-              <input type="text" className="modal-option" />
-              <br />
-              <br />
-              <label htmlFor="Detail Question">Detail Question</label>
-              <br />
-              <textarea
-                name="detailquestion"
-                id=""
-                cols="30"
-                rows="5"
-                className="modal-textarea"
-              ></textarea>
-            </form>
+            </div>
+            <br />
+            <label htmlFor="Division">Division</label>
+            <br />
+            <select
+              name="division"
+              id="divisions"
+              onChange={(e) => handleInput(e)}
+              className="modal-option"
+            >
+              <option value="">-- Choose Division</option>
+              <option value="IT Support">IT Support</option>
+              <option value="Programmer">Programmer</option>
+              <option value="Infra">Infra</option>
+            </select>
+            <br />
+            <br />
+            <label htmlFor="Question">Question</label>
+            <br />
+            <input
+              type="text"
+              id="questions"
+              onKeyUp={(e) => handleInput(e)}
+              className="modal-option"
+            />
+            <br />
+            <br />
+            <label htmlFor="Detail Question">Detail Question</label>
+            <br />
+            <textarea
+              name="detailquestion"
+              id="detailquestion"
+              onKeyUp={(e) => handleInput(e)}
+              cols="30"
+              rows="5"
+              className="modal-textarea"
+            ></textarea>
             <hr />
             <br />
+
             <div className="modal-footer">
-              <button className="modal-ccl" onClick={closeModal}>
+              <button className="modal-ccl" onClick={() => closeModal()}>
                 Cancel
               </button>
-              <button className="modal-submit">Submit</button>
+              <button
+                type="submit"
+                onClick={(e) => addData(e)}
+                form="form"
+                className="modal-submit"
+              >
+                Submit
+              </button>
             </div>
           </div>
         </Modal>
@@ -128,25 +179,27 @@ function Ticket() {
                 <th>Action</th>
               </tr>
             </thead>
+
             <tbody className="ticket-table-body">
-              {TicketData.map((item) => (
-                <tr key={item.id}>
-                  <td>{item.id}</td>
-                  <td>{item.questions}</td>
-                  <td>{item.divisions}</td>
-                  <td>{item.status}</td>
-                  <td>{item.createdat}</td>
-                  <td>
-                    <button>
-                      <img
-                        src={eye}
-                        alt="eye"
-                        className="submit-detailticket"
-                      />
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {tickets.length > 0 &&
+                tickets.map((item) => (
+                  <tr key={item.id}>
+                    <td>{item.id}</td>
+                    <td>{item.questions}</td>
+                    <td>{item.divisions}</td>
+                    <td>{item.status}</td>
+                    <td>{item.createdat}</td>
+                    <td>
+                      <button>
+                        <img
+                          src={eye}
+                          alt="eye"
+                          className="submit-detailticket"
+                        />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
           <br />

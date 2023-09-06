@@ -5,6 +5,8 @@ import Login from './pages/login';
 import App from './pages/App';
 import MyTicket from './pages/MyTicket';
 import DetailTicketPage from './pages/DetailTicketPage';
+import FaqPages from './pages/FaqPages';
+import NewsPage from './pages/NewsPage';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +24,14 @@ const router = createBrowserRouter([
   {
     path: '/detailticket',
     element: <DetailTicketPage />,
+  },
+  {
+    path: '/faq',
+    element: <FaqPages />,
+  },
+  {
+    path: '/news',
+    element: <NewsPage />,
   },
 ]);
 

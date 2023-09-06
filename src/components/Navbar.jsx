@@ -4,17 +4,19 @@ import { Link } from 'react-router-dom';
 function Navbar() {
   return (
     <div className="navbar-helpdesk">
-      <h3>FGS Infotama</h3>
+      <h3>
+        <Link to="/app">FGS Infotama</Link>
+      </h3>
       <nav className="nav-help">
         <ul>
           <li>
             <Link to="/ticket">My Tickets</Link>
           </li>
           <li>
-            <a href="#a">FAQ</a>
+            <Link to="/faq">FAQ</Link>
           </li>
           <li>
-            <a href="#a">News</a>
+            <Link to="/news">News</Link>
           </li>
           <li>
             <a href="#a">Notification</a>
