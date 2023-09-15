@@ -1,33 +1,56 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TicketData } from '../utils/data';
 
 function Dashboard() {
+  const [showAll, setShowAll] = useState(false);
+
+  const toggleShowAll = () => {
+    setShowAll(!showAll);
+  };
+
+  const datatotalTicket = TicketData.filter(
+    (totalTicket) => totalTicket.status
+  );
+  const totalTicket = datatotalTicket.length;
+
+  const ticketWait = TicketData.map(
+    (tickdata) => tickdata.status === 'Waiting'
+  ).reduce((a, b) => a + b);
+
+  const ticketOnProgress = TicketData.map(
+    (onProgress) => onProgress.status === 'OnProgress'
+  ).reduce((c, d) => c + d);
+
+  const ticketDone = TicketData.map(
+    (tickDone) => tickDone.status === 'Done'
+  ).reduce((e, f) => e + f);
+
   return (
     <div className="dashboard-helpdesk">
       <h2>Dashboard</h2>
       <div className="dashboard-box">
         <div className="dashboard-count">
           <p>Total Ticket</p>
-          <span>0</span>
+          <span>{totalTicket}</span>
         </div>
         <div className="dashboard-count">
           <p>Ticket Waiting</p>
-          <span>0</span>
+          <span className="dashboardcount-waiting">{ticketWait}</span>
         </div>
         <div className="dashboard-count">
           <p>Ticket On Progress</p>
-          <span>0</span>
+          <span className="dashboardcount-progress">{ticketOnProgress}</span>
         </div>
         <div className="dashboard-count">
           <p>Ticket Done</p>
-          <span>0</span>
+          <span className="dashboardcount-done">{ticketDone}</span>
         </div>
       </div>
 
       <div className="dashboard-list-ticket">
         <div className="dashboard-list-head">
           <h2>List Tickets</h2>
-          <p>Show All</p>
+          <button onClick={toggleShowAll}>Show All</button>
         </div>
         <div className="dashboard-list-table">
           <table>
@@ -40,14 +63,47 @@ function Dashboard() {
               </tr>
             </thead>
             <tbody className="dashboard-list-table-body">
-              {TicketData.map((item) => (
-                <tr key={item.id}>
-                  <td>{item.id}</td>
-                  <td>{item.questions}</td>
-                  <td>{item.status}</td>
-                  <td>{item.createdat}</td>
-                </tr>
-              ))}
+              {showAll
+                ? TicketData.map((item) => (
+                    <tr key={item.id}>
+                      <td>{item.id}</td>
+                      <td>{item.questions}</td>
+                      <td
+                        className={
+                          item.status === 'Waiting'
+                            ? 'dashboardcount-waiting'
+                            : item.status === 'OnProgress'
+                            ? 'dashboardcount-progress'
+                            : item.status === 'Done'
+                            ? 'dashboardcount-done'
+                            : ''
+                        }
+                      >
+                        {item.status}
+                      </td>
+                      <td>{item.createdat}</td>
+                    </tr>
+                  ))
+                : TicketData.slice(0, 2).map((item) => (
+                    <tr key={item.id}>
+                      <td>{item.id}</td>
+                      <td>{item.questions}</td>
+                      <td
+                        className={
+                          item.status === 'Waiting'
+                            ? 'dashboardcount-waiting'
+                            : item.status === 'OnProgress'
+                            ? 'dashboardcount-progress'
+                            : item.status === 'Done'
+                            ? 'dashboardcount-done'
+                            : ''
+                        }
+                      >
+                        {item.status}
+                      </td>
+                      <td>{item.createdat}</td>
+                    </tr>
+                  ))}
             </tbody>
           </table>
         </div>

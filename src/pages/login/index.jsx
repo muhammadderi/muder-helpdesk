@@ -38,7 +38,7 @@ function Login() {
       (user) => user.email === email.value && user.password === password.value
     );
 
-    // console.log(userLogin);
+    // console.log(userLogin.email);
 
     if (userLogin) {
       setIsSubmitted(true);

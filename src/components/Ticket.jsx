@@ -20,10 +20,13 @@ Modal.setAppElement('#root');
 
 function Ticket() {
   // modal
-  let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
   const [tickets, setTickets] = useState([]);
   const [formData, setFormData] = useState({});
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredList, setFilteredList] = useState(tickets);
+  // eslint-disable-next-line no-unused-vars
+  let subtitle;
 
   useEffect(() => {
     setTickets(TicketData);
@@ -50,19 +53,44 @@ function Ticket() {
 
   const addData = (form) => {
     let id = '00000' + (tickets.length + 1);
-    // let date = new Date();
     let today = moment().format('YYYY-MM-DD HH:mm:ss');
-    setFormData({
-      ...formData,
-      createdat: today,
-      status: 'waiting',
-      id: id,
-    });
 
-    setTickets([...tickets, formData]);
+    const newData = {
+      id: id,
+      status: 'Waiting',
+      createdat: today,
+      ...formData,
+    };
+
+    setTickets([...tickets, newData]);
 
     setFormData({});
     setIsOpen(false);
+  };
+
+  //Search list of objects
+  const handleSearch = (event) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+
+    const searchList = tickets.filter((item) => {
+      return item.questions.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+    });
+
+    setTickets(searchList);
+  };
+
+  //filtered
+  const onFilterChange = (event) => {
+    console.log(tickets);
+    const selectedSize = Number(event.target.value);
+
+    const filteredList = tickets.filter((item) => {
+      // return Number(items.id.length) > selectedSize;
+      return Number(item.id) <= selectedSize;
+    });
+
+    setFilteredList(filteredList);
   };
 
   return (
@@ -152,17 +180,20 @@ function Ticket() {
       </div>
       <div className="ticket-helpdesk-box">
         <div className="ticket-helpdesk-main">
-          <select>
+          <select name="size" onChange={onFilterChange}>
+            <option value="5">5</option>
             <option value="10">10</option>
-            <option value="20">20</option>
             <option value="30">30</option>
-            <option value="40">40</option>
             <option value="50">50</option>
-            <option value="all">all</option>
+            <option value="1000">All</option>
           </select>
+
           <h4>Items</h4>
           <input
             type="text"
+            name="search"
+            value={searchQuery}
+            onChange={handleSearch}
             placeholder="Search"
             className="ticket-helpdesk-main-search"
           />
@@ -181,25 +212,67 @@ function Ticket() {
             </thead>
 
             <tbody className="ticket-table-body">
-              {tickets.length > 0 &&
-                tickets.map((item) => (
-                  <tr key={item.id}>
-                    <td>{item.id}</td>
-                    <td>{item.questions}</td>
-                    <td>{item.divisions}</td>
-                    <td>{item.status}</td>
-                    <td>{item.createdat}</td>
-                    <td>
-                      <button>
-                        <img
-                          src={eye}
-                          alt="eye"
-                          className="submit-detailticket"
-                        />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+              {tickets.length <= 5
+                ? tickets.map((item) => (
+                    <tr key={item.id}>
+                      <td>{item.id}</td>
+                      <td>{item.questions}</td>
+                      <td>{item.divisions}</td>
+                      <td
+                        className={
+                          item.status === 'Waiting'
+                            ? 'dashboardcount-waiting'
+                            : item.status === 'OnProgress'
+                            ? 'dashboardcount-progress'
+                            : item.status === 'Done'
+                            ? 'dashboardcount-done'
+                            : ''
+                        }
+                      >
+                        {item.status}
+                      </td>
+                      <td>{item.createdat}</td>
+                      <td>
+                        <button>
+                          <img
+                            src={eye}
+                            alt="eye"
+                            className="submit-detailticket"
+                          />
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                : filteredList.map((item) => (
+                    <tr key={item.id}>
+                      <td>{item.id}</td>
+                      <td>{item.questions}</td>
+                      <td>{item.divisions}</td>
+                      <td
+                        className={
+                          item.status === 'Waiting'
+                            ? 'dashboardcount-waiting'
+                            : item.status === 'OnProgress'
+                            ? 'dashboardcount-progress'
+                            : item.status === 'Done'
+                            ? 'dashboardcount-done'
+                            : ''
+                        }
+                      >
+                        {item.status}
+                      </td>
+                      <td>{item.createdat}</td>
+                      <td>
+                        <button>
+                          <img
+                            src={eye}
+                            alt="eye"
+                            className="submit-detailticket"
+                          />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
             </tbody>
           </table>
           <br />

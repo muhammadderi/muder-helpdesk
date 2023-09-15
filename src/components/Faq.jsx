@@ -1,4 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+// const questions = [
+//   {
+//     id: 1,
+//     subject: 'programmer',
+//     question: 'kenapa menu pdf di tradelist engga bisa di buka?',
+//   },
+//   {
+//     id: 2,
+//     subject: 'programmer',
+//     question: 'kenapa menu pdf di tradelist engga bisa di buka?',
+//   },
+//   {
+//     id: 3,
+//     subject: 'programmer',
+//     question: 'kenapa menu pdf di tradelist engga bisa di buka?',
+//   },
+//   {
+//     id: 4,
+//     subject: 'programmer',
+//     question: 'kenapa menu pdf di tradelist engga bisa di buka?',
+//   },
+// ];
 
 function Faq() {
   return (
