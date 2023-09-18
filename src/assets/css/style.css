@@ -375,7 +375,6 @@ button.middle {
 
 .faq-pages {
   background-color: var(--primary-color);
-  height: 100vh;
 }
 
 .faq-header {
@@ -417,11 +416,47 @@ button.middle {
 .divisions-faq hr {
   border-top: 0.5px solid grey;
 }
+
+.divisions-faq span {
+  color: red;
+}
+
 .questions-faq {
   background-color: #fff;
   width: 60%;
   border-radius: 3px;
   padding: 10px;
+}
+
+.questions-faq-menu {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.item {
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+  padding: 20px 24px;
+  padding-right: 48px;
+  cursor: pointer;
+  border-top: 4px solid #fff;
+  border-bottom: 4px solid #fff;
+
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  /* column-gap: 24px; */
+  align-items: center;
+}
+
+.item-detail {
+  grid-column: 1;
+  /* padding-bottom: 16px;
+  line-height: 1.6; */
+  text-align: left;
+}
+
+.question-faq-step img {
+  width: 20px;
+  padding: 0 10px;
 }
 
 /* News */
