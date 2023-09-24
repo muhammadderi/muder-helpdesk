@@ -1,8 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import navbarUser from '../assets/img/navbaruser.jpg';
+import { TicketData } from '../utils/data';
+// import { TicketData } from '../utils/data';
 
-function Navbar() {
+function Navbar({ notif }) {
+  const countDone = TicketData.map(
+    (countNotif) => countNotif.status === 'Done'
+  ).reduce((a, b) => a + b);
   return (
     <div className="navbar-helpdesk">
       <h3>
@@ -20,7 +25,10 @@ function Navbar() {
             <Link to="/news">News</Link>
           </li>
           <li>
-            <a href="#a">Notification</a>
+            <Link to="/notification">
+              Notification
+              {countDone > 0 ? <sup>{countDone}</sup> : ''}
+            </Link>
           </li>
         </ul>
       </nav>

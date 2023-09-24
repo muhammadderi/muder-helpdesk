@@ -7,6 +7,7 @@ import MyTicket from './pages/MyTicket';
 import DetailTicketPage from './pages/DetailTicketPage';
 import FaqPages from './pages/FaqPages';
 import NewsPage from './pages/NewsPage';
+import NotificationPages from './pages/NotificationPages';
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: '/news',
     element: <NewsPage />,
+  },
+  {
+    path: '/notification',
+    element: <NotificationPages />,
   },
 ]);
 

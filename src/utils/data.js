@@ -5,7 +5,7 @@ const TicketData = [
     divisions: 'IT Support',
     status: 'Waiting',
     createdat: '2023-08-29 12:00:00',
-    detailquestion: 'bagaimana cara hitung profit di aplikasi dengan cepat?',
+    detailquestion: 'bagaimana cara hitung profit di aplikasi dengan cepat?.',
   },
   {
     id: '000002',

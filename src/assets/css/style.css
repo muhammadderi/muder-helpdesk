@@ -28,6 +28,13 @@
   color: #fff;
 }
 
+.nav-help sup {
+  color: white;
+  font-size: 10px;
+  background-color: red;
+  width: 100px;
+}
+
 .nav-help ul {
   display: flex;
   list-style-type: none;
@@ -532,4 +539,44 @@ a:hover {
 .news-helpdesk-main img {
   width: 100%;
   height: 30%;
+}
+
+/* Notif */
+.notification-header {
+  background-color: #176b87;
+  height: 110px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding: 0 80px;
+}
+
+/* .notification-main table {
+  border: 1px dashed black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+} */
+
+.notification-main {
+  padding: 0;
+  margin: 0;
+}
+.notification-main-thead {
+  text-align: center;
+  justify-content: center;
+  margin: 50px auto 0 auto;
+  align-items: center;
+}
+
+.notification-main-thead .id {
+  width: 50px;
+}
+
+.notification-main-thead th {
+  width: 300px;
+  background-color: black;
+  color: white;
 }
