@@ -90,3 +90,26 @@
   align-items: center;
   color: red;
 }
+
+/* responsive */
+
+@media only screen and (max-width: 600px) {
+  * {
+    padding: 0;
+    margin: 0;
+  }
+
+  .helpdesk-login {
+    position: relative;
+    height: 100vh;
+    text-align: center;
+  }
+
+  .lgn-left-side {
+    display: none;
+  }
+
+  .lgn-right-side {
+    width: 100%;
+  }
+}

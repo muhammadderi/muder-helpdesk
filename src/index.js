@@ -4,10 +4,10 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Login from './pages/login';
 import App from './pages/App';
 import MyTicket from './pages/MyTicket';
-import DetailTicketPage from './pages/DetailTicketPage';
 import FaqPages from './pages/FaqPages';
 import NewsPage from './pages/NewsPage';
 import NotificationPages from './pages/NotificationPages';
+import TicketDetail from './components/TicketDetail';
 
 const router = createBrowserRouter([
   {
@@ -23,10 +23,6 @@ const router = createBrowserRouter([
     element: <MyTicket />,
   },
   {
-    path: '/detailticket',
-    element: <DetailTicketPage />,
-  },
-  {
     path: '/faq',
     element: <FaqPages />,
   },
@@ -37,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: '/notification',
     element: <NotificationPages />,
+  },
+  {
+    path: '/detail/:id',
+    element: <TicketDetail />,
   },
 ]);
 

@@ -33,4 +33,9 @@ const TicketData = [
   },
 ];
 
-export { TicketData };
+function getTicket(id) {
+  const foundedTicket = TicketData.find((ticket) => ticket.id === id);
+  return foundedTicket;
+}
+
+export { TicketData, getTicket };

@@ -10,7 +10,7 @@
 /* app */
 .helpdesk-app {
   background-color: var(--primary-color);
-  height: 100vh;
+  min-height: 100vh;
 }
 
 /* Navbar */
@@ -107,7 +107,7 @@
 
 /* Dashboard */
 .dashboard-helpdesk {
-  height: 80vh;
+  min-height: 80vh;
   padding: 0 100px;
 }
 
@@ -219,7 +219,7 @@
 }
 
 .ticket-helpdesk {
-  height: 100vh;
+  min-height: 100vh;
   width: 70%;
   padding: 0 200px;
 }
@@ -542,6 +542,11 @@ a:hover {
 }
 
 /* Notif */
+.notification-page {
+  background-color: var(--primary-color);
+  min-height: 100vh;
+}
+
 .notification-header {
   background-color: #176b87;
   height: 110px;
@@ -564,6 +569,7 @@ a:hover {
   padding: 0;
   margin: 0;
 }
+
 .notification-main-thead {
   text-align: center;
   justify-content: center;
@@ -572,11 +578,102 @@ a:hover {
 }
 
 .notification-main-thead .id {
-  width: 50px;
+  width: 70px;
 }
 
 .notification-main-thead th {
   width: 300px;
-  background-color: black;
+  background-color: #176b87;
   color: white;
+  height: 40px;
+  border: none;
+}
+
+.notification-main-thead img.trush-button {
+  width: 20px;
+  height: 20px;
+  background-color: var(--primary-color);
+}
+
+.notification-main-thead button {
+  border: none;
+}
+
+/* Responsive */
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.helpdesk-app {
+  padding: 0;
+  margin: 0;
+  /* max-width: 600px; */
+}
+
+.helpdesk-app h2 {
+  font-size: 20px;
+  /* max-width: 600px; */
+}
+
+.helpdesk-app table {
+  font-size: 15px;
+  /* max-width: 600px; */
+}
+
+.navbar-helpdesk {
+  padding: 10px 30px;
+  /* max-width: 600px; */
+}
+
+.nav-help li a {
+  padding: 0 5px;
+}
+
+.dropdown-content a {
+  padding: 0;
+}
+
+.dashboard-helpdesk {
+  padding: 0;
+}
+
+.dashboard-box span {
+  font-size: 25px;
+}
+
+/* Myticket */
+
+.my-ticket {
+  padding: 0;
+  margin: 0;
+}
+.ticket-helpdesk {
+  padding: 0 80px;
+}
+
+.ticket-helpdesk-header {
+  padding: 50px 0 20px 0;
+}
+
+.faq-box {
+  padding: 20px 0;
+}
+
+/* .card {
+  width: 300px;
+  height: 300px;
+} */
+
+.news-helpdesk-main {
+  font-size: 14px;
+}
+
+.news-helpdesk-main h1 {
+  font-size: 16px;
+}
+
+.notification-main-thead {
+  padding: 0 20px;
 }

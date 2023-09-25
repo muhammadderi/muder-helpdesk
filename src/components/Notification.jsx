@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
-import { TicketData } from '../utils/data';
+import React from 'react';
+import Trush from '../assets/img/trush.png';
 
-// const filterTicket = TicketData.filter((ticket) => ticket.status === 'Done');
-
-function Notification() {
-  const [notif, setNotif] = useState(TicketData);
+function Notification({ notif, setNotif }) {
+  // const [notif, setNotif] = useState(TicketData);
 
   const deleteByItem = (value) => {
     setNotif((oldValues) => {
@@ -36,7 +34,9 @@ function Notification() {
                   <td>{ticket.detailquestion}</td>
                   <td>{ticket.status}</td>
                   <td>
-                    <button onClick={() => deleteByItem(ticket)}>X</button>
+                    <button onClick={() => deleteByItem(ticket)}>
+                      <img className="trush-button" src={Trush} alt="trush" />
+                    </button>
                   </td>
                 </tbody>
               </table>

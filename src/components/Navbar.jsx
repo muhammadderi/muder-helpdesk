@@ -1,13 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import navbarUser from '../assets/img/navbaruser.jpg';
-import { TicketData } from '../utils/data';
 // import { TicketData } from '../utils/data';
 
 function Navbar({ notif }) {
-  const countDone = TicketData.map(
-    (countNotif) => countNotif.status === 'Done'
-  ).reduce((a, b) => a + b);
+  // const countDone = notif
+  //   .map((countNotif) => countNotif.status === 'Done')
+  //   .reduce((a, b) => a + b);
+
+  const countDone =
+    notif && Array.isArray(notif)
+      ? notif.filter((countNotif) => countNotif.status === 'Done').length
+      : 0;
+
   return (
     <div className="navbar-helpdesk">
       <h3>
