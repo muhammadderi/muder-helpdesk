@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import { TicketData } from '../utils/data';
 import eye from '../assets/img/eye.png';
 import moment from 'moment/moment';
+import TicketDetail from './TicketDetail';
 
 const customStyles = {
   content: {
@@ -25,6 +26,9 @@ function Ticket() {
   const [formData, setFormData] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredList, setFilteredList] = useState(tickets);
+  const [selectedTicket, setSelectedTicket] = useState(null);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+
   // eslint-disable-next-line no-unused-vars
   let subtitle;
 
@@ -34,8 +38,6 @@ function Ticket() {
 
   const handleInput = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
-
-    console.log(formData);
   };
 
   function openModal() {
@@ -82,7 +84,6 @@ function Ticket() {
 
   //filtered
   const onFilterChange = (event) => {
-    console.log(tickets);
     const selectedSize = Number(event.target.value);
 
     const filteredList = tickets.filter((item) => {
@@ -91,6 +92,16 @@ function Ticket() {
     });
 
     setFilteredList(filteredList);
+  };
+
+  const openDetailModal = (ticketData) => {
+    setSelectedTicket(ticketData);
+    setIsDetailModalOpen(true);
+  };
+
+  const closeDetailModal = () => {
+    setSelectedTicket(null);
+    setIsDetailModalOpen(false);
   };
 
   return (
@@ -233,10 +244,11 @@ function Ticket() {
                       </td>
                       <td>{item.createdat}</td>
                       <td>
-                        <button>
+                        <button onClick={() => openDetailModal(item)}>
                           <img
                             src={eye}
                             alt="eye"
+                            style={customStyles}
                             className="submit-detailticket"
                           />
                         </button>
@@ -273,6 +285,11 @@ function Ticket() {
                       </td>
                     </tr>
                   ))}
+              <TicketDetail
+                isOpen={isDetailModalOpen}
+                ticketData={selectedTicket}
+                onClose={closeDetailModal}
+              />
             </tbody>
           </table>
           <br />

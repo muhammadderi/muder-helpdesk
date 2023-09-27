@@ -1,34 +1,37 @@
-// In TicketDetail.js
-import React, { useEffect, useState } from 'react';
-import { TicketData } from '../utils/data'; // Import your data source
-import { useParams } from 'react-router-dom';
+import React from 'react';
 
-function TicketDetail() {
-  const { id } = useParams();
-  const [ticket, setTicket] = useState(null);
-
-  useEffect(() => {
-    // Fetch ticket details based on the ID
-    const selectedTicket = TicketData.find((item) => item.id === id);
-
-    if (selectedTicket) {
-      setTicket(selectedTicket);
-    }
-  }, [id]);
+const TicketDetail = ({ isOpen, ticketData, onClose }) => {
+  if (!isOpen) {
+    return null;
+  }
 
   return (
-    <div className="ticket-detail">
-      <h2>Ticket Details</h2>
-      {ticket ? (
-        <div>
-          <strong>ID:</strong> {ticket.id}
-          {/* Display other ticket details here */}
-        </div>
-      ) : (
-        <p>Ticket not found.</p>
-      )}
+    <div className="ticket-detail-modal">
+      <div className="ticket-detail-content">
+        <h3>Ticket Details</h3>
+        <p>
+          <strong>ID:</strong> {ticketData.id}
+        </p>
+        <p>
+          <strong>Question:</strong> {ticketData.questions}
+        </p>
+        <p>
+          <strong>Detail:</strong> {ticketData.detailquestion}
+        </p>
+        <p>
+          <strong>Divisions:</strong> {ticketData.divisions}
+        </p>
+        <p>
+          <strong>Status:</strong> {ticketData.status}
+        </p>
+        <p>
+          <strong>Created:</strong> {ticketData.createdat}
+        </p>
+
+        <button onClick={onClose}>Close</button>
+      </div>
     </div>
   );
-}
+};
 
 export default TicketDetail;

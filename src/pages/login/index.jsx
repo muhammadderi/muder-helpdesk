@@ -34,13 +34,11 @@ function Login() {
     //email and passwd from doc forms
     let { email, password } = document.forms[0];
 
-    const userLogin = usersData.find(
+    const userActive = usersData.find(
       (user) => user.email === email.value && user.password === password.value
     );
 
-    // console.log(userLogin.email);
-
-    if (userLogin) {
+    if (userActive) {
       setIsSubmitted(true);
       navigate('/app');
     } else {

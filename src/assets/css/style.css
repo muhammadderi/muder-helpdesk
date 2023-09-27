@@ -599,81 +599,125 @@ a:hover {
   border: none;
 }
 
+.ticket-detail-modal {
+  /* display: none; Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+.ticket-detail-content {
+  background-color: var(--primary-color);
+  margin: 15% auto; /* 15% from the top and centered */
+  text-align: left;
+  padding: 20px 100px;
+  border: 1px solid #888;
+  width: 20%; /* Could be more or less, depending on screen size */
+  border-radius: 30px;
+}
+
+.ticket-detail-content button {
+  background-color: #176b87;
+  width: 70px;
+  height: 20px;
+  color: white;
+}
+.ticket-detail-content h3 {
+  text-align: center;
+  padding: 5px 0;
+}
+
 /* Responsive */
+@media only screen and (max-width: 600px) {
+  * {
+    padding: 0;
+    margin: 0;
+  }
 
-* {
-  padding: 0;
-  margin: 0;
-}
+  .helpdesk-app {
+    padding: 0;
+    margin: 0;
+    /* max-width: 600px; */
+  }
 
-.helpdesk-app {
-  padding: 0;
-  margin: 0;
-  /* max-width: 600px; */
-}
+  .helpdesk-app h2 {
+    font-size: 20px;
+    /* max-width: 600px; */
+  }
 
-.helpdesk-app h2 {
-  font-size: 20px;
-  /* max-width: 600px; */
-}
+  .helpdesk-app table {
+    font-size: 15px;
+    /* max-width: 600px; */
+  }
 
-.helpdesk-app table {
-  font-size: 15px;
-  /* max-width: 600px; */
-}
+  .navbar-helpdesk {
+    padding: 10px 30px;
+    /* max-width: 600px; */
+  }
 
-.navbar-helpdesk {
-  padding: 10px 30px;
-  /* max-width: 600px; */
-}
+  .nav-help li a {
+    padding: 0 5px;
+  }
 
-.nav-help li a {
-  padding: 0 5px;
-}
+  .dropdown-content a {
+    padding: 0;
+  }
 
-.dropdown-content a {
-  padding: 0;
-}
+  .dashboard-helpdesk {
+    padding: 0;
+  }
 
-.dashboard-helpdesk {
-  padding: 0;
-}
+  .dashboard-box span {
+    font-size: 25px;
+  }
 
-.dashboard-box span {
-  font-size: 25px;
-}
+  /* Myticket */
 
-/* Myticket */
+  .my-ticket {
+    padding: 0;
+    margin: 0;
+  }
+  .ticket-helpdesk {
+    padding: 0 80px;
+  }
 
-.my-ticket {
-  padding: 0;
-  margin: 0;
-}
-.ticket-helpdesk {
-  padding: 0 80px;
-}
+  .ticket-helpdesk-header {
+    padding: 50px 0 20px 0;
+  }
 
-.ticket-helpdesk-header {
-  padding: 50px 0 20px 0;
-}
+  .faq-box {
+    padding: 20px 0;
+  }
 
-.faq-box {
-  padding: 20px 0;
-}
+  .item {
+    padding: 10px 24px;
+  }
 
-/* .card {
+  /* .card {
   width: 300px;
   height: 300px;
 } */
 
-.news-helpdesk-main {
-  font-size: 14px;
-}
+  .news-helpdesk-main {
+    font-size: 14px;
+  }
 
-.news-helpdesk-main h1 {
-  font-size: 16px;
-}
+  .news-helpdesk-main h1 {
+    font-size: 16px;
+  }
 
-.notification-main-thead {
-  padding: 0 20px;
+  .notification-main-thead {
+    padding: 0 20px;
+  }
+
+  .ticket-detail-content {
+    margin: 35% 15px 35% 15px;
+    width: 50%;
+  }
 }

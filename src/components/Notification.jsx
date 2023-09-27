@@ -2,8 +2,6 @@ import React from 'react';
 import Trush from '../assets/img/trush.png';
 
 function Notification({ notif, setNotif }) {
-  // const [notif, setNotif] = useState(TicketData);
-
   const deleteByItem = (value) => {
     setNotif((oldValues) => {
       return oldValues.filter((ticket) => ticket !== value);
@@ -28,8 +26,8 @@ function Notification({ notif, setNotif }) {
                   <th className="id">Status</th>
                   <th className="id">Action</th>
                 </thead>
-                <tbody>
-                  <td key={ticket.id}>{ticket.id}</td>
+                <tbody key={ticket.id}>
+                  <td>{ticket.id}</td>
                   <td>{ticket.questions}</td>
                   <td>{ticket.detailquestion}</td>
                   <td>{ticket.status}</td>
