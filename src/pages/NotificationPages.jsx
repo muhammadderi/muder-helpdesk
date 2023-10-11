@@ -1,16 +1,16 @@
 import React from 'react';
-import { useState } from 'react';
+// import { useState } from 'react';
 import Notification from '../components/Notification';
-import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { TicketData } from '../utils/data';
+// import { TicketData } from '../utils/data';
+import Navbar from '../components/Navbar';
 
 function NotificationPages() {
-  const [notif, setNotif] = useState(TicketData);
+  // const [notif, setNotif] = useState(TicketData);
   return (
-    <div className='notification-page'>
-      <Navbar notif={notif} />
-      <Notification notif={notif} setNotif={setNotif} />
+    <div className="notification-page">
+      <Navbar />
+      <Notification />
       <Footer />
     </div>
   );

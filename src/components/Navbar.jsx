@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import navbarUser from '../assets/img/navbaruser.jpg';
+import { CounterContext } from './CounterContext';
+
 // import { TicketData } from '../utils/data';
 
-function Navbar({ notif }) {
+function Navbar() {
   // const countDone = notif
   //   .map((countNotif) => countNotif.status === 'Done')
   //   .reduce((a, b) => a + b);
 
-  const countDone =
-    notif && Array.isArray(notif)
-      ? notif.filter((countNotif) => countNotif.status === 'Done').length
-      : 0;
+  const countDone = useContext(CounterContext);
+  console.log(countDone);
+  // const countDone =
+  //   notif && Array.isArray(notif)
+  //     ? notif.filter((countNotif) => countNotif.status === 'Done').length
+  //     : 0;
 
   return (
     <div className="navbar-helpdesk">
@@ -31,18 +35,18 @@ function Navbar({ notif }) {
           </li>
           <li>
             <Link to="/notification">
-              Notification
-              {countDone > 0 ? <sup>{countDone}</sup> : ''}
+              Notification{' '}
+              <sup>{countDone > 0 ? <sup>{countDone}</sup> : ''}</sup>
             </Link>
           </li>
         </ul>
       </nav>
-      <div class="dropdown">
-        <button class="dropbtn">
+      <div className="dropdown">
+        <button className="dropbtn">
           <img src={navbarUser} alt="fgsLogo" className="navbar-fgslogo" />
-          <i class="fa fa-caret-down"></i>
+          <i className="fa fa-caret-down"></i>
         </button>
-        <div class="dropdown-content">
+        <div className="dropdown-content">
           <Link to={'/'}>Logout</Link>
         </div>
       </div>

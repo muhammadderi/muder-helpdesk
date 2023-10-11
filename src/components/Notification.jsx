@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Trush from '../assets/img/trush.png';
+import { TicketData } from '../utils/data';
+import { CounterContext } from './CounterContext';
+import Navbar from './Navbar';
 
-function Notification({ notif, setNotif }) {
+function Notification() {
+  const [notif, setNotif] = useState(TicketData);
+
+  const countDone =
+    notif && Array.isArray(notif)
+      ? notif.filter((countNotif) => countNotif.status === 'Done').length
+      : 0;
+
   const deleteByItem = (value) => {
     setNotif((oldValues) => {
       return oldValues.filter((ticket) => ticket !== value);
@@ -10,23 +20,30 @@ function Notification({ notif, setNotif }) {
 
   return (
     <div className="notifcation-helpdesk">
+      <CounterContext.Provider value={countDone}>
+        <Navbar />
+      </CounterContext.Provider>
+      ;
       <div className="notification-header">
         <h2>Notifications</h2>
       </div>
       <div className="notification-main">
         {notif
           .filter((ticket) => ticket.status.includes('Done'))
-          .map((ticket) => (
-            <>
-              <table className="notification-main-thead">
-                <thead>
+          .map((ticket, i) => (
+            <table className="notification-main-thead" key={i}>
+              <thead>
+                <tr>
                   <th className="id">Id</th>
                   <th>Question</th>
                   <th>Detail Question</th>
                   <th className="id">Status</th>
                   <th className="id">Action</th>
-                </thead>
-                <tbody key={ticket.id}>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
                   <td>{ticket.id}</td>
                   <td>{ticket.questions}</td>
                   <td>{ticket.detailquestion}</td>
@@ -36,9 +53,9 @@ function Notification({ notif, setNotif }) {
                       <img className="trush-button" src={Trush} alt="trush" />
                     </button>
                   </td>
-                </tbody>
-              </table>
-            </>
+                </tr>
+              </tbody>
+            </table>
           ))}
       </div>
     </div>

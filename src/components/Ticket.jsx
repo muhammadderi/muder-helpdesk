@@ -28,12 +28,14 @@ function Ticket() {
   const [filteredList, setFilteredList] = useState(tickets);
   const [selectedTicket, setSelectedTicket] = useState(null);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+  const [tempTickets, setTempTickets] = useState([]);
 
   // eslint-disable-next-line no-unused-vars
   let subtitle;
 
   useEffect(() => {
     setTickets(TicketData);
+    setTempTickets(TicketData);
   }, []);
 
   const handleInput = (e) => {
@@ -75,11 +77,22 @@ function Ticket() {
     const query = event.target.value;
     setSearchQuery(query);
 
-    const searchList = tickets.filter((item) => {
-      return item.questions.toLowerCase().indexOf(query.toLowerCase()) !== -1;
-    });
+    // query === '' ? setTickets(tickets) :
 
-    setTickets(searchList);
+    if (query.length < 1) {
+      setTickets(tempTickets);
+      console.log(tempTickets);
+    } else {
+      const searchList = tickets.filter((item) => {
+        return item.questions.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+      });
+
+      if (searchList.length < 1) {
+        setTickets(tempTickets);
+      } else {
+        setTickets(searchList);
+      }
+    }
   };
 
   //filtered
