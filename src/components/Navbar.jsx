@@ -1,23 +1,25 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import navbarUser from '../assets/img/navbaruser.jpg';
-import { CounterContext } from './CounterContext';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import navbarUser from "../assets/img/login.png";
+import { TicketData } from "../utils/data";
 
-// import { TicketData } from '../utils/data';
+// const NotifContext = createContext(null);
 
 function Navbar() {
-  // const countDone = notif
-  //   .map((countNotif) => countNotif.status === 'Done')
-  //   .reduce((a, b) => a + b);
+  const [notif, setNotif] = useState(TicketData);
 
-  const countDone = useContext(CounterContext);
-  console.log(countDone);
-  // const countDone =
-  //   notif && Array.isArray(notif)
-  //     ? notif.filter((countNotif) => countNotif.status === 'Done').length
-  //     : 0;
+  const countDone =
+    setNotif && Array.isArray(notif)
+      ? notif.filter((countNotif) => countNotif.status === "Done").length
+      : 0;
+
+  const userLogin = localStorage.getItem("username");
+  function dropUser() {
+    localStorage.removeItem("username");
+  }
 
   return (
+    // <NotifContext.Provider value={notif}>
     <div className="navbar-helpdesk">
       <h3>
         <Link to="/app">FGS Infotama</Link>
@@ -35,8 +37,7 @@ function Navbar() {
           </li>
           <li>
             <Link to="/notification">
-              Notification{' '}
-              <sup>{countDone > 0 ? <sup>{countDone}</sup> : ''}</sup>
+              Notifications <sup>{countDone}</sup>
             </Link>
           </li>
         </ul>
@@ -44,10 +45,13 @@ function Navbar() {
       <div className="dropdown">
         <button className="dropbtn">
           <img src={navbarUser} alt="fgsLogo" className="navbar-fgslogo" />
+          <p>{userLogin}</p>
           <i className="fa fa-caret-down"></i>
         </button>
         <div className="dropdown-content">
-          <Link to={'/'}>Logout</Link>
+          <Link to={"/"} onClick={dropUser}>
+            Logout
+          </Link>
         </div>
       </div>
     </div>

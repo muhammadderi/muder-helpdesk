@@ -11,7 +11,7 @@
 
 .lgn-left-side {
   width: 50%;
-  background-image: url('../../assets/img/fgs-product.jpeg');
+  background-image: url("../../assets/img/fgs-product.jpeg");
   background-repeat: no-repeat;
   align-items: center;
   /* object-fit: cover; */
@@ -35,8 +35,32 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  /* background-color: #ecf2ff; */
+}
+
+#light {
   background-color: #ecf2ff;
 }
+
+#dark {
+  background-color: #000;
+  color: #fff;
+}
+
+.switch {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* .lgn-right-side .light {
+  background-color: #ecf2ff;
+}
+
+.lgn-right-side .dark {
+  background-color: #000;
+  color: #fff;
+} */
 
 .lgn-right-side-head {
   display: flex;

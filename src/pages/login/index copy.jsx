@@ -1,26 +1,16 @@
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 import "./style.css";
 import fgslogo from "../../assets/img/fgs-logo.jpeg";
 import { useNavigate } from "react-router-dom";
-import ReactSwitch from "react-switch";
-import { ThemeContext } from "../../components/ThemeContext";
+
+const activeUserLogin = createContext(null);
 
 function Login() {
-  const [theme, setTheme] = useState("dark");
-
-  const toggleTheme = () => {
-    setTheme((curr) => (curr === "light" ? "dark" : "light"));
-  };
-
   const navigate = useNavigate();
   //menyimpan pesan error
   const [errorMessages, setErrorMessages] = useState({});
   //menyimpan login berhasil
   const [isSubmitted, setIsSubmitted] = useState(false);
-  // const [loggedInUser, setLoggedInUser] = useState(null);
-  // const themeChange = useContext(ChangeTheme);
-
-  console.log(theme);
 
   //database
   const usersData = [
@@ -52,10 +42,7 @@ function Login() {
       (user) => user.email === email.value && user.password === password.value
     );
 
-    localStorage.setItem("username", userActive.username);
-
     if (userActive) {
-      // setLoggedInUser(userActive);
       setIsSubmitted(true);
       navigate("/app");
     } else {
@@ -63,15 +50,8 @@ function Login() {
     }
   };
 
-  // function handleChangeTheme() {
-  //   setTheme("dark");
-  // }
-
-  // const ChangingTheme = useContext(ChangeTheme);
-  // console.log(ChangingTheme);
-
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <activeUserLogin.Provider value={userActive}>
       <div className="helpdesk-login">
         <div className="lgn-left-side">
           <h2>Real Time Trading Spesialist</h2>
@@ -80,7 +60,7 @@ function Login() {
             Trading System IDX Official Vendor
           </p>
         </div>
-        <div className="lgn-right-side" id={theme}>
+        <div className="lgn-right-side">
           <div className="lgn-right-side-head">
             <img src={fgslogo} alt="fgs" className="fgs" />
             <h1>Helpdesk Ticketing System</h1>
@@ -123,14 +103,10 @@ function Login() {
                 admin@fgsinfotama.com
               </a>
             </p>
-            <div className="switch">
-              <ReactSwitch onChange={toggleTheme} checked={theme === "dark"} />
-              <label>{theme === "dark" ? "Dark Mode" : "Light Mode"}</label>
-            </div>
           </form>
         </div>
       </div>
-    </ThemeContext.Provider>
+    </activeUserLogin.Provider>
   );
 }
 

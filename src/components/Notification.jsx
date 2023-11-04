@@ -1,16 +1,9 @@
-import React, { useState } from 'react';
-import Trush from '../assets/img/trush.png';
-import { TicketData } from '../utils/data';
-import { CounterContext } from './CounterContext';
-import Navbar from './Navbar';
+import React, { useState } from "react";
+import Trush from "../assets/img/trush.png";
+import { TicketData } from "../utils/data";
 
 function Notification() {
   const [notif, setNotif] = useState(TicketData);
-
-  const countDone =
-    notif && Array.isArray(notif)
-      ? notif.filter((countNotif) => countNotif.status === 'Done').length
-      : 0;
 
   const deleteByItem = (value) => {
     setNotif((oldValues) => {
@@ -20,16 +13,12 @@ function Notification() {
 
   return (
     <div className="notifcation-helpdesk">
-      <CounterContext.Provider value={countDone}>
-        <Navbar />
-      </CounterContext.Provider>
-      ;
       <div className="notification-header">
         <h2>Notifications</h2>
       </div>
       <div className="notification-main">
         {notif
-          .filter((ticket) => ticket.status.includes('Done'))
+          .filter((ticket) => ticket.status.includes("Done"))
           .map((ticket, i) => (
             <table className="notification-main-thead" key={i}>
               <thead>
