@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Trush from "../assets/img/trush.png";
 import { TicketData } from "../utils/data";
 
-function Notification() {
+function Notification({ theme }) {
   const [notif, setNotif] = useState(TicketData);
 
   const deleteByItem = (value) => {
@@ -13,21 +13,43 @@ function Notification() {
 
   return (
     <div className="notifcation-helpdesk">
-      <div className="notification-header">
+      <div
+        className="notification-header"
+        id={`${theme === "light" ? "special-light" : "dark"}`}
+      >
         <h2>Notifications</h2>
       </div>
       <div className="notification-main">
         {notif
           .filter((ticket) => ticket.status.includes("Done"))
           .map((ticket, i) => (
-            <table className="notification-main-thead" key={i}>
+            <table className="notification-main-thead" id={theme} key={i}>
               <thead>
                 <tr>
-                  <th className="id">Id</th>
-                  <th>Question</th>
-                  <th>Detail Question</th>
-                  <th className="id">Status</th>
-                  <th className="id">Action</th>
+                  <th
+                    className="id"
+                    id={`${theme === "light" ? "light" : "dark"}`}
+                  >
+                    Id
+                  </th>
+                  <th id={`${theme === "light" ? "light" : "dark"}`}>
+                    Question
+                  </th>
+                  <th id={`${theme === "light" ? "light" : "dark"}`}>
+                    Detail Question
+                  </th>
+                  <th
+                    id={`${theme === "light" ? "light" : "dark"}`}
+                    className="id"
+                  >
+                    Status
+                  </th>
+                  <th
+                    id={`${theme === "light" ? "light" : "dark"}`}
+                    className="id"
+                  >
+                    Action
+                  </th>
                 </tr>
               </thead>
 

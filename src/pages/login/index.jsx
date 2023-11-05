@@ -1,15 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
 import fgslogo from "../../assets/img/fgs-logo.jpeg";
 import { useNavigate } from "react-router-dom";
 import ReactSwitch from "react-switch";
-import { ThemeContext } from "../../components/ThemeContext";
+import { ThemeContextProvider } from "../../components/ThemeContext";
 
 function Login() {
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("light");
+
+  useEffect(() => {
+    // Retrieve theme choice from local storage or any other persistence mechanism
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      setTheme(savedTheme);
+    } else {
+      // Set default theme if no theme is stored
+      setTheme("light");
+    }
+  }, []);
 
   const toggleTheme = () => {
-    setTheme((curr) => (curr === "light" ? "dark" : "light"));
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    // Store the theme choice in localStorage
+    localStorage.setItem("theme", newTheme);
   };
 
   const navigate = useNavigate();
@@ -52,9 +66,8 @@ function Login() {
       (user) => user.email === email.value && user.password === password.value
     );
 
-    localStorage.setItem("username", userActive.username);
-
     if (userActive) {
+      localStorage.setItem("username", userActive.username);
       // setLoggedInUser(userActive);
       setIsSubmitted(true);
       navigate("/app");
@@ -71,7 +84,7 @@ function Login() {
   // console.log(ChangingTheme);
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContextProvider value={{ theme, toggleTheme }}>
       <div className="helpdesk-login">
         <div className="lgn-left-side">
           <h2>Real Time Trading Spesialist</h2>
@@ -87,8 +100,10 @@ function Login() {
             <p>Signing to your account</p>
           </div>
           <form onSubmit={handleSubmit}>
-            <div className={isSubmitted ? "hide" : "showError"}>
-              {errorMessages.message}
+            <div
+              className={isSubmitted && errorMessages ? "hide" : "showError"}
+            >
+              {errorMessages.message && errorMessages.message}
             </div>
 
             <input
@@ -130,7 +145,7 @@ function Login() {
           </form>
         </div>
       </div>
-    </ThemeContext.Provider>
+    </ThemeContextProvider>
   );
 }
 
