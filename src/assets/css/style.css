@@ -7,6 +7,20 @@
   --primary-color: #ecf2ff;
 }
 
+#light {
+  background-color: #ecf2ff;
+}
+
+#dark {
+  background-color: #000;
+  color: #008170;
+}
+
+#special-light {
+  background-color: #176887;
+  color: #fff;
+}
+
 /* app */
 .helpdesk-app {
   /* background-color: var(--primary-color); */
@@ -393,9 +407,9 @@ button.middle {
 }
 
 .faq-header {
-  background-color: #176b87;
+  /* background-color: #176887; */
   height: 110px;
-  color: #fff;
+  /* color: #fff; */
   display: flex;
   align-items: center;
   justify-content: left;
@@ -481,7 +495,6 @@ button.middle {
   height: 80%;
 }
 .news-helpdesk-header {
-  background-color: #176b87;
   height: 110px;
   color: #fff;
   display: flex;
@@ -728,13 +741,4 @@ a:hover {
     margin: 35% 15px 35% 15px;
     width: 50%;
   }
-}
-
-#light {
-  background-color: #ecf2ff;
-}
-
-#dark {
-  background-color: #000;
-  color: #fff;
 }

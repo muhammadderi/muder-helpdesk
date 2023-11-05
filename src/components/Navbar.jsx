@@ -16,6 +16,7 @@ function Navbar() {
   const userLogin = localStorage.getItem("username");
   function dropUser() {
     localStorage.removeItem("username");
+    localStorage.removeItem("theme");
   }
 
   return (
