@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { TicketData } from '../utils/data';
+import React, { useState } from "react";
+import { TicketData } from "../utils/data";
 
-function Dashboard() {
+function Dashboard({ theme }) {
   const [showAll, setShowAll] = useState(false);
 
   const toggleShowAll = () => {
@@ -14,21 +14,23 @@ function Dashboard() {
   const totalTicket = datatotalTicket.length;
 
   const ticketWait = TicketData.map(
-    (tickdata) => tickdata.status === 'Waiting'
+    (tickdata) => tickdata.status === "Waiting"
   ).reduce((a, b) => a + b);
 
   const ticketOnProgress = TicketData.map(
-    (onProgress) => onProgress.status === 'OnProgress'
+    (onProgress) => onProgress.status === "OnProgress"
   ).reduce((c, d) => c + d);
 
   const ticketDone = TicketData.map(
-    (tickDone) => tickDone.status === 'Done'
+    (tickDone) => tickDone.status === "Done"
   ).reduce((e, f) => e + f);
+
+  const darkMode = theme === "dark" ? { color: "#000" } : {};
 
   return (
     <div className="dashboard-helpdesk">
       <h2>Dashboard</h2>
-      <div className="dashboard-box">
+      <div className="dashboard-box" style={darkMode}>
         <div className="dashboard-count">
           <p>Total Ticket</p>
           <span>{totalTicket}</span>
@@ -62,7 +64,7 @@ function Dashboard() {
                 <th>Created At</th>
               </tr>
             </thead>
-            <tbody className="dashboard-list-table-body">
+            <tbody className="dashboard-list-table-body" style={darkMode}>
               {showAll
                 ? TicketData.map((item) => (
                     <tr key={item.id}>
@@ -70,13 +72,13 @@ function Dashboard() {
                       <td>{item.questions}</td>
                       <td
                         className={
-                          item.status === 'Waiting'
-                            ? 'dashboardcount-waiting'
-                            : item.status === 'OnProgress'
-                            ? 'dashboardcount-progress'
-                            : item.status === 'Done'
-                            ? 'dashboardcount-done'
-                            : ''
+                          item.status === "Waiting"
+                            ? "dashboardcount-waiting"
+                            : item.status === "OnProgress"
+                            ? "dashboardcount-progress"
+                            : item.status === "Done"
+                            ? "dashboardcount-done"
+                            : ""
                         }
                       >
                         {item.status}
@@ -90,13 +92,13 @@ function Dashboard() {
                       <td>{item.questions}</td>
                       <td
                         className={
-                          item.status === 'Waiting'
-                            ? 'dashboardcount-waiting'
-                            : item.status === 'OnProgress'
-                            ? 'dashboardcount-progress'
-                            : item.status === 'Done'
-                            ? 'dashboardcount-done'
-                            : ''
+                          item.status === "Waiting"
+                            ? "dashboardcount-waiting"
+                            : item.status === "OnProgress"
+                            ? "dashboardcount-progress"
+                            : item.status === "Done"
+                            ? "dashboardcount-done"
+                            : ""
                         }
                       >
                         {item.status}

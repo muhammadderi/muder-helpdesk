@@ -9,7 +9,7 @@ function MyTicket() {
   return (
     <div className="my-ticket" id={theme}>
       <Navbar />
-      <Ticket />
+      <Ticket theme={theme} />
       <Footer />
     </div>
   );

@@ -62,6 +62,8 @@ function FaqDetails({ data, theme }) {
     setDivisions(divisi);
   }
 
+  const darkMode = theme === "dark" ? { color: "#000" } : {};
+
   return (
     <div className="helpdesk-faq">
       {/* <div className="faq-header" id={theme}> */}
@@ -102,7 +104,7 @@ function FaqDetails({ data, theme }) {
           </button>
           <hr />
         </div>
-        <div className="questions-faq">
+        <div className="questions-faq" style={darkMode}>
           <h3>Questions</h3>
           <hr />
           {data

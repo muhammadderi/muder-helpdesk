@@ -54,6 +54,9 @@ const newsData = [
 ];
 
 function News({ theme }) {
+  const darkMode = theme === "dark" ? { color: "#fff" } : {};
+  // const darkModeButton =
+  //   theme === "dark" ? { backgroundColor: "#fff", color: "#000" } : {};
   return (
     <div className="news-helpdesk">
       <div
@@ -67,7 +70,7 @@ function News({ theme }) {
           <div key={news.id} className="news-item">
             <div className="card">
               <img src={news.photo} alt="img-news" />
-              <h1>{news.title}</h1>
+              <h1 style={darkMode}>{news.title}</h1>
               <br />
               <p>{news.date}</p>
               <p>{news.information}</p>

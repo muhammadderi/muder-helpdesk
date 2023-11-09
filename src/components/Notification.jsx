@@ -11,6 +11,11 @@ function Notification({ theme }) {
     });
   };
 
+  const darkMode1 =
+    theme === "dark" ? { backgroundColor: "#000", color: "#fff" } : {};
+  const darkMode =
+    theme === "dark" ? { backgroundColor: "#fff", color: "#000" } : {};
+
   return (
     <div className="notifcation-helpdesk">
       <div
@@ -23,37 +28,29 @@ function Notification({ theme }) {
         {notif
           .filter((ticket) => ticket.status.includes("Done"))
           .map((ticket, i) => (
-            <table className="notification-main-thead" id={theme} key={i}>
+            <table
+              className="notification-main-thead"
+              id={theme}
+              style={darkMode}
+              key={i}
+            >
               <thead>
                 <tr>
-                  <th
-                    className="id"
-                    id={`${theme === "light" ? "light" : "dark"}`}
-                  >
+                  <th style={darkMode} className="id">
                     Id
                   </th>
-                  <th id={`${theme === "light" ? "light" : "dark"}`}>
-                    Question
-                  </th>
-                  <th id={`${theme === "light" ? "light" : "dark"}`}>
-                    Detail Question
-                  </th>
-                  <th
-                    id={`${theme === "light" ? "light" : "dark"}`}
-                    className="id"
-                  >
+                  <th style={darkMode}>Question</th>
+                  <th style={darkMode}>Detail Question</th>
+                  <th style={darkMode} className="id">
                     Status
                   </th>
-                  <th
-                    id={`${theme === "light" ? "light" : "dark"}`}
-                    className="id"
-                  >
+                  <th style={darkMode} className="id">
                     Action
                   </th>
                 </tr>
               </thead>
 
-              <tbody>
+              <tbody style={darkMode1}>
                 <tr>
                   <td>{ticket.id}</td>
                   <td>{ticket.questions}</td>

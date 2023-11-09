@@ -1,30 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import Modal from 'react-modal';
-import { TicketData } from '../utils/data';
-import eye from '../assets/img/eye.png';
-import moment from 'moment/moment';
-import TicketDetail from './TicketDetail';
+import React, { useState, useEffect } from "react";
+import Modal from "react-modal";
+import { TicketData } from "../utils/data";
+import eye from "../assets/img/eye.png";
+import moment from "moment/moment";
+import TicketDetail from "./TicketDetail";
 
 const customStyles = {
   content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
   },
 };
 
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
-Modal.setAppElement('#root');
+Modal.setAppElement("#root");
 
-function Ticket() {
+function Ticket({ theme }) {
   // modal
   const [modalIsOpen, setIsOpen] = useState(false);
   const [tickets, setTickets] = useState([]);
   const [formData, setFormData] = useState({});
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [filteredList, setFilteredList] = useState(tickets);
   const [selectedTicket, setSelectedTicket] = useState(null);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
@@ -56,12 +56,12 @@ function Ticket() {
   }
 
   const addData = (form) => {
-    let id = '00000' + (tickets.length + 1);
-    let today = moment().format('YYYY-MM-DD HH:mm:ss');
+    let id = "00000" + (tickets.length + 1);
+    let today = moment().format("YYYY-MM-DD HH:mm:ss");
 
     const newData = {
       id: id,
-      status: 'Waiting',
+      status: "Waiting",
       createdat: today,
       ...formData,
     };
@@ -116,6 +116,8 @@ function Ticket() {
     setSelectedTicket(null);
     setIsDetailModalOpen(false);
   };
+
+  const darkMode = theme === "dark" ? { color: "#000" } : {};
 
   return (
     <div className="ticket-helpdesk">
@@ -223,7 +225,7 @@ function Ticket() {
           />
         </div>
         <div className="ticket-helpdesk-main-tablebox">
-          <table className="ticket-helpdesk-main-table">
+          <table className="ticket-helpdesk-main-table" style={darkMode}>
             <thead>
               <tr>
                 <th>ID</th>
@@ -244,13 +246,13 @@ function Ticket() {
                       <td>{item.divisions}</td>
                       <td
                         className={
-                          item.status === 'Waiting'
-                            ? 'dashboardcount-waiting'
-                            : item.status === 'OnProgress'
-                            ? 'dashboardcount-progress'
-                            : item.status === 'Done'
-                            ? 'dashboardcount-done'
-                            : ''
+                          item.status === "Waiting"
+                            ? "dashboardcount-waiting"
+                            : item.status === "OnProgress"
+                            ? "dashboardcount-progress"
+                            : item.status === "Done"
+                            ? "dashboardcount-done"
+                            : ""
                         }
                       >
                         {item.status}
@@ -275,13 +277,13 @@ function Ticket() {
                       <td>{item.divisions}</td>
                       <td
                         className={
-                          item.status === 'Waiting'
-                            ? 'dashboardcount-waiting'
-                            : item.status === 'OnProgress'
-                            ? 'dashboardcount-progress'
-                            : item.status === 'Done'
-                            ? 'dashboardcount-done'
-                            : ''
+                          item.status === "Waiting"
+                            ? "dashboardcount-waiting"
+                            : item.status === "OnProgress"
+                            ? "dashboardcount-progress"
+                            : item.status === "Done"
+                            ? "dashboardcount-done"
+                            : ""
                         }
                       >
                         {item.status}

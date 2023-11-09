@@ -69,6 +69,7 @@ function Login() {
     if (userActive) {
       localStorage.setItem("username", userActive.username);
       // setLoggedInUser(userActive);
+      localStorage.getItem("theme");
       setIsSubmitted(true);
       navigate("/app");
     } else {

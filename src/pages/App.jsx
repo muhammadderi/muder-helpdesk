@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="helpdesk-app" id={theme}>
       <Navbar />
-      <Dashboard />
+      <Dashboard theme={theme} />
       <Footer />
     </div>
   );
